@@ -5,11 +5,15 @@
 ## TODO List
 
 - Check allowance
-- Allow Permissions
+- Transfer on behalf of a different User
+
+- NFT URI
+
 - Listening to Events
+
 - Write a Program in Rust
 - Deploy the Program
-- NFT URI
+
 - Check account transactions
 - Wormhole/Vortex
 - Neon
