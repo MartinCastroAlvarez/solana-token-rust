@@ -10,6 +10,7 @@
 - [Creating a Token](#creating-a-token)
 - [Creating an NFT](#creating-an-nft)
 - [Listing the Token](#listing-the-token)
+- [Allowing other Accounts](#allowing-other-accounts)
 
 ## References
 
@@ -231,10 +232,10 @@ Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 
 #### Check your balance
 ```bash
-spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 ```
 ```bash
-1000000
+10
 ```
 
 #### Open the account on the Solana explorer to check your balance
@@ -259,7 +260,7 @@ cp ~/Downloads/logo.png assets/mainnet/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnT
 git add assets/mainnet/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn/logo.png
 ```
 
-### Add the token 
+#### Add your token to the token list
 To add a new token, add another json block to the large tokens list in `src/tokens/solana.tokenlist.json` and submit a PR.
 ```bash
 vim src/tokens/solana.tokenlist.json 
@@ -287,56 +288,70 @@ git checkout -b MartinCastroAlvarezNisman
 git push origin MartinCastroAlvarezNisman
 ```
 
-#### Send tokens
+#### Transferring tokens
 
-#### Use Solana's command-line tool solana-keygen to generate keypair files
+#### Create another wallet 
 ```bash
-solana-keygen new --outfile key.json
+solana-keygen new --outfile other.json
 ```
 ```bash
 Generating a new keypair
-[...]
-Wrote new keypair to key.json
-=============================================================================
-pubkey: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
-=============================================================================
+For added security, enter a BIP39 passphrase
+NOTE! This passphrase improves security of the recovery seed phrase NOT the
+keypair file itself, which is stored as insecure plain text
+BIP39 Passphrase (empty for none): 
+Enter same passphrase again: 
+Wrote new keypair to other.json
+================================================================================
+pubkey: AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+================================================================================
 Save this seed phrase and your BIP39 passphrase to recover your new keypair:
-mixture code leopard relax nice debris truth close differ hurry donor balcony
-=============================================================================
+during wheat disorder pepper maple wise number together laptop poet narrow trend
+================================================================================
 ```
 
 #### Retrieve the private key from the json file
 ```bash
-cat key.json
+cat other.json
 ```
 ```bash
-[41,88,225,51,18,0,227,73,125,103,15,76,72,117,150,92,125,181,75,247,58,25,210,119,4,84,64,158,138,249,239,209,229,44,161,17,139,218,26,171,96,204,62,111,122,15,174,13,108,108,173,221,27,98,122,203,2,74,235,143,157,13,195,174]
+[53,55,82,181,90,137,126,208,219,71,54,77,119,145,77,88,5,103,208,217,10,218,187,210,47,131,48,215,123,226,223,110,147,227,22,153,66,69,41,186,253,0,224,158,116,81,90,102,12,218,125,243,30,144,25,89,122,152,197,55,190,90,78,215]
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### Create an account for the other account
 ```bash
-git clone https://github.com/metaplex-foundation/metaplex.git
-cd metaplex
-cd js && yarn install && yarn bootstrap
-cd packages/cli
+spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner other.json
 ```
-
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+Creating account Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+Signature: UhR64tVJzEWPvAsVJJCnAKV7nSgc7ZMrPGyt28sYEKv26hGhjp8j7jK4wDAcif5BEKx5HvApSA6HdE4sqTGyfD3
 ```
 
+#### Transfer a release into the new account
+```bash
+spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+```
+```bash
+Transfer 1 tokens
+  Sender: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+  Recipient: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+```
+
+#### Check the new balance
+```bash
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+```
+```bash
+9
+```
+```bash
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+```
+```bash
+1
+```
+
+## Allowing other Accounts
+
+- [Solana allowing other wallet to mint or transfer token from my wallet](https://stackoverflow.com/questions/70862412/solana-allowing-other-wallet-to-mint-or-transfer-token-from-my-wallet)
 
