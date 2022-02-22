@@ -4,11 +4,12 @@
 
 ## Table of Contents
 
--  [References](#references)
--  [Installation](#installation)
--  [Connecting a Wallet](#connecting-a-wallet)
--  [Creating a Wallet](#creating-a-token)
--  [Creating an NFT](#creating-an-nft)
+- [References](#references)
+- [Installation](#installation)
+- [Connecting a Wallet](#connecting-a-wallet)
+- [Creating a Token](#creating-a-token)
+- [Creating an NFT](#creating-an-nft)
+- [Listing the Token](#listing-the-token)
 
 ## References
 
@@ -31,9 +32,9 @@ solana --version
 solana-cli 1.9.8 (src:4ebeb336; feat:2191737503)
 ```
 
-## Connecting a wallet
+## Connecting a Wallet
 
-#### Use Solana's command-line tool solana-keygen to generate keypair files.
+#### Use Solana's command-line tool solana-keygen to generate keypair files
 ```bash
 solana-keygen new --outfile key.json
 ```
@@ -49,7 +50,7 @@ mixture code leopard relax nice debris truth close differ hurry donor balcony
 =============================================================================
 ```
 
-#### Retrieve the private key from the json file.
+#### Retrieve the private key from the json file
 ```bash
 cat key.json
 ```
@@ -57,7 +58,7 @@ cat key.json
 [41,88,225,51,18,0,227,73,125,103,15,76,72,117,150,92,125,181,75,247,58,25,210,119,4,84,64,158,138,249,239,209,229,44,161,17,139,218,26,171,96,204,62,111,122,15,174,13,108,108,173,221,27,98,122,203,2,74,235,143,157,13,195,174]
 ```
 
-#### Verify you hold the private key for a given address.
+#### Verify you hold the private key for a given address
 ```bash
 solana-keygen verify GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 key.json
 ```
@@ -65,7 +66,7 @@ solana-keygen verify GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 key.json
 Verification for public key: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3: Success
 ```
 
-#### Set the local environment to authenticate its requests with the new wallet.
+#### Set the local environment to authenticate its requests with the new wallet
 ```bash
 solana config set --keypair key.json 
 ```
@@ -108,7 +109,7 @@ Commitment: confirmed
 
 ## Creating a Token
 
-#### Create a new token.
+#### Create a new token
 ```bash
 spl-token create-token --decimals 10
 ```
@@ -138,7 +139,7 @@ Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
 Error: Account already exists: 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
 ```
 
-#### Mint token.
+#### Mint token
 ```bash
 spl-token mint AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 1000000
 ```
@@ -183,7 +184,7 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 
 ## Creating an NFT 
 
-#### Create the new NFT.
+#### Create the new NFT
 ```bash
 spl-token create-token --decimals 0
 ```
@@ -201,7 +202,7 @@ Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
 Signature: 4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H6GpiBZFFwqJioZqXWrh
 ```
 
-#### Mint 10 editions.
+#### Mint 10 editions
 ```bash
 spl-token mint 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 10
 ```
@@ -242,6 +243,82 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 - [devnet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd?cluster=devnet)
 
 ![account2.png](./account2.png)
+
+#### Listing the Token
+
+#### Clone the the [Token List](https://github.com/solana-labs/token-list) repository
+```bash
+git clone https://github.com/solana-labs/token-list
+cd token-list/
+```
+
+#### Add the media to the logos directory
+```bash
+mkdir assets/mainnet/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn/
+cp ~/Downloads/logo.png assets/mainnet/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn/logo.png
+git add assets/mainnet/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn/logo.png
+```
+
+### Add the token 
+To add a new token, add another json block to the large tokens list in `src/tokens/solana.tokenlist.json` and submit a PR.
+```bash
+vim src/tokens/solana.tokenlist.json 
+```
+```bash
+    {
+      "chainId": 101,
+      "address": "AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn",
+      "symbol": "NISMAN",
+      "name": "Nisman Coin",
+      "decimals": 10,
+      "logoURI": "https://github.com/MartinCastroAlvarez/ethereum-solidity-contract/raw/main/logo.png",      "tags": [
+        "solana"
+      ],
+      "extensions": {
+        "website": "https://github.com/MartinCastroAlvarez/ethereum-solidity-contract"
+      }
+    },
+```
+
+#### Commit your changes and submit a pull request.
+```bash
+git commit -a -m 'Adding MP token'
+git checkout -b MartinCastroAlvarezNisman
+git push origin MartinCastroAlvarezNisman
+```
+
+#### Send tokens
+
+#### Use Solana's command-line tool solana-keygen to generate keypair files
+```bash
+solana-keygen new --outfile key.json
+```
+```bash
+Generating a new keypair
+[...]
+Wrote new keypair to key.json
+=============================================================================
+pubkey: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+=============================================================================
+Save this seed phrase and your BIP39 passphrase to recover your new keypair:
+mixture code leopard relax nice debris truth close differ hurry donor balcony
+=============================================================================
+```
+
+#### Retrieve the private key from the json file
+```bash
+cat key.json
+```
+```bash
+[41,88,225,51,18,0,227,73,125,103,15,76,72,117,150,92,125,181,75,247,58,25,210,119,4,84,64,158,138,249,239,209,229,44,161,17,139,218,26,171,96,204,62,111,122,15,174,13,108,108,173,221,27,98,122,203,2,74,235,143,157,13,195,174]
+```
+
+
+
+
+
+
+
 
 
 
