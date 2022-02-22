@@ -4,6 +4,10 @@
 
 ## TODO List
 
+- Find Open Sea for Solana
+- Find Bored Ape for Solana
+- Find out how to send money from the person to the buyer; and the NFT to the buyer. Does the seller have to allow us to transfer their NFT? 
+
 - Check allowance
 - Transfer on behalf of a different User
 
