@@ -4,6 +4,7 @@
 
 ## TODO List
 
+- Check allowance
 - Allow Permissions
 - Listening to Events
 - Write a Program in Rust
@@ -275,6 +276,19 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 10
 ```
 
+#### Check your portfolio
+```bash
+spl-token accounts 
+```
+```bash
+Token                                         Balance
+---------------------------------------------------------------
+8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB  9      
+AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn  1000000
+C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ  220300 
+CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL  0      
+```
+
 #### Open the account on the Solana explorer to check your balance
 
 - [mainet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd)
@@ -387,6 +401,31 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv29
 ```bash
 1
 ```
+
+#### Allow another account to transfer the NFT on your behalf
+```bash
+spl-token approve Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json
+```
+```bash
+Approve 1 tokens
+  Account: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+  Delegate: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+```
+
+#### Use your approval to transfer the NFT on behalf of the other account
+```bash
+spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd 
+```
+```bash
+Approve 1 tokens
+  Account: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+  Delegate: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+```
+
+Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
+Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+Creating account Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+
 
 ## Allowing other Accounts
 
