@@ -1,5 +1,7 @@
 # Solana NFT
 
+![sol](./sol.jpg)
+
 ## References
 
 - [Getting Started with MetaPlex](https://docs.metaplex.com/token-metadata/getting-started)
