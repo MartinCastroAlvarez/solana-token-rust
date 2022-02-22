@@ -2,6 +2,14 @@
 
 ![sol](./sol.jpg)
 
+## Table of Contents
+
+-  [References](#references)
+-  [Installation](#installation)
+-  [Connecting a Wallet](#connecting-a-wallet)
+-  [Creating a Wallet](#creating-a-token)
+-  [Creating an NFT](#creating-an-nft)
+
 ## References
 
 - [Getting Started with MetaPlex](https://docs.metaplex.com/token-metadata/getting-started)
@@ -98,7 +106,7 @@ Commitment: confirmed
 
 ![clusters.png](./clusters.png)
 
-## Creating a token
+## Creating a Token
 
 #### Create a new token.
 ```bash
