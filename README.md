@@ -4,7 +4,6 @@
 
 ## TODO List
 
-- Moralis
 - Allow Permissions
 - Listening to Events
 - Write a Program in Rust
@@ -33,6 +32,21 @@
 #### [Python SDK](https://michaelhly.github.io/solana-py/)
 
 Installing the SDK is not recommended. It is just a wrapper for the OS `solana-cli` which captures the output on STDOUT and transforms it into Python code. However, if the `solana-cli` version is incompatible, it does not work properly.
+
+#### [moralis.io](https://moralis.io/moralis-releases-solana-api/)
+
+It can can be used to interact with the Blockchain. For example:
+```bash
+curl -X GET "https://solana-gateway.moralis.io/account/devnet/GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3/balance?cluster=devnet" -H "X-Api-Key: sBpG7zBJbKgI7DXHUWnqYxxgWveqpoQZ0mbCqti0SnfV7GQxyoKneiIGyd9lMx4q"
+```
+```bash
+{
+    "lamports":"24982265600",
+    "solana":"24.9822656"
+}
+```
+
+![moralis.png](./moralis.png)
 
 #### Install the Solana release v1.9.8 on your machine:
 ```bash
