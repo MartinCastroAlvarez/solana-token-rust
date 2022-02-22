@@ -23,12 +23,6 @@ solana --version
 solana-cli 1.9.8 (src:4ebeb336; feat:2191737503)
 ```
 
-## Concepts
-
-- Wallet: TODO
-- SPL Token: TODO
-- Wallet: TODO
-
 ## Connecting a wallet
 
 #### Use Solana's command-line tool solana-keygen to generate keypair files.
@@ -88,6 +82,8 @@ Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLu
 - [mainet](https://explorer.solana.com/address/GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3)
 - [devnet](https://explorer.solana.com/address/GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3?cluster=devnet)
 
+![wallet.png](./wallet.png)
+
 #### Connect to devnet
 ```bash
 solana config set --url devnet
@@ -107,50 +103,72 @@ Commitment: confirmed
 spl-token create-token --decimals 10
 ```
 ```bash
-Creating token C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
-Signature: 2pFYQVVH24LWeHRT3FVr2PzTSPTDXWY5gtobFw7LGSwAKcNMyVWnWFzrP8xPdh5xdn64M925sckdqRjZKdB9RBYK
+Creating token AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 
+Signature: 44CPkEej8Mz2okM41673XGWDmARpykn7gfFEzySSmj51vhYivmwkJycCVV1Xdno3MzexQQF5u8XK1e5fkbRhEmnd
 ```
 
 #### Open the new token on the Solana explorer
 
-- [mainet](https://explorer.solana.com/address/C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ)
-- [devnet](https://explorer.solana.com/address/C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ?cluster=devnet)
+- [mainet](https://explorer.solana.com/address/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn)
+- [devnet](https://explorer.solana.com/address/AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn?cluster=devnet)
 
-#### Create an account on your wallet to hold the new token
+![token.png](./token.png)
+
+#### Create an account on your wallet to hold the NFT
 ```bash
-spl-token create-account C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
+spl-token create-account AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 ```
 ```bash
-Creating account 9u9qHHstJC1vMSKvwEhTZ6pk2afSQgRAQpysKsVoA6j1
-Signature: MwaXx7Pf4Xvs5uiUQkn2vM71vxzZTNqWMUkQS2SK35X8RCe1mvvE75rBYx5w2AUVwrZLLJHqkYQVRHawtLspdSv
+Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
+Signature: 2JDWfThLe8dN1sCPvn8pUuwAgfH3ZLVnjW741pvvr3xiwSvWxtWoCGDxt3zzsCCNFMxhPyDrAY6Q5WoxwWw1dXUN
+```
+Trying to create multiple accounts for the same token generates the following error:
+```bash
+Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
+Error: Account already exists: 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
 ```
 
 #### Mint token.
 ```bash
-spl-token mint C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ 300
+spl-token mint AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 1000000
 ```
 ```bash
-Minting 300 tokens
-  Token: C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
-  Recipient: 9u9qHHstJC1vMSKvwEhTZ6pk2afSQgRAQpysKsVoA6j1
+Minting 1000000 tokens
+  Token: AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+  Recipient: 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
 ```
 
 #### Disable minting to set the token supply
 ```bash
-spl-token authorize C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ mint --disable
+spl-token authorize AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn mint --disable
 ```
 ```bash
-Updating C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
+Updating AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
   Current mint authority: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
   New mint authority: disabled
 ```
 
 #### Check the token supply
 ```bash
-spl-token supply C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
+spl-token supply AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 ```
 ```bash
 300
+```
+
+#### Open the account on the Solana explorer to check your balance
+
+- [mainet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8)
+- [devnet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8?cluster=devnet)
+
+![account.png](./account.png)
+
+#### Check your balance
+```bash
+spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+```
+```bash
+1000000
 ```
 
 ## Creating a new NFT 
@@ -160,48 +178,62 @@ spl-token supply C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ
 spl-token create-token --decimals 0
 ```
 ```bash
-Creating token CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL
-Signature: FhkHuzejrW6goicoBSz5FLjwddy9VAYqgcqeQiWmwd8X2YUMWFz1NzftFr7aAERZpc9EJzcQyLyQHx1JE2NtmYd
+Creating token 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+Signature: 45bawtJRWxLRcPRqnqe2mxsmXosnnR3wfXi2kFntppYZzTe8naphHH5yLLiWz7mx528NkqUwUiEafkmF1uTwXJdj
 ```
 
 #### Create an account on your wallet to hold the NFT
 ```bash
-spl-token create-account CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL
+spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 ```
 ```bash
-Creating account 5mVvtcbLEYyf1HJuC7twrUEffCqKGe63Cqi8wmf1UWs8
-Signature: 5rAuxkdZL3AQ32xUgRVZ5Y2rQjV2xyBhG9tN9Tw9rSSouUBd4VqGsKKuv47VFceyqjsCgULzNjm5obAL3huqD5h3
+Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+Signature: 4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H6GpiBZFFwqJioZqXWrh
 ```
 
 #### Mint 10 editions.
 ```bash
-spl-token mint CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL 10
+spl-token mint 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 10
 ```
 ```bash
 Minting 10 tokens
-  Token: CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL
-  Recipient: 5mVvtcbLEYyf1HJuC7twrUEffCqKGe63Cqi8wmf1UWs8
+  Token: 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+  Recipient: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
 ```
 
 #### Disable minting to set the token supply
 ```bash
-spl-token authorize CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL mint --disable
+spl-token authorize 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB mint --disable
 ```
 ```bash
-Updating CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL
+Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
   Current mint authority: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
   New mint authority: disabled
 ```
 
 #### Open the NFT on the Solana explorer
 
-- [mainet](https://explorer.solana.com/address/CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL)
-- [devnet](https://explorer.solana.com/address/CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL?cluster=devnet)
+- [mainet](https://explorer.solana.com/address/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB)
+- [devnet](https://explorer.solana.com/address/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB?cluster=devnet)
 
+![nft.png](./nft.png)
 
+#### Open the account on the Solana explorer to check your balance
 
+- [mainet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd)
+- [devnet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd?cluster=devnet)
 
+![account2.png](./account2.png)
 
+#### Check your balance
+```bash
+spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+```
+```bash
+1000000
+```
+
+## Creating a new NFT 
 
 ```bash
 git clone https://github.com/metaplex-foundation/metaplex.git
@@ -214,19 +246,4 @@ cd packages/cli
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-
-
-
-
-
-```bash
-git clone https://github.com/metaplex-foundation/metaplex.git
-cd metaplex
-cd js && yarn install && yarn bootstrap
-cd packages/cli
-```
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
 
