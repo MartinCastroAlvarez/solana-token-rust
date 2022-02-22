@@ -8,6 +8,10 @@
 - Listening to Events
 - Write a Program in Rust
 - Deploy the Program
+- NFT URI
+- Check account transactions
+- Wormhole/Vortex
+- Neon
 
 ## Table of Contents
 
@@ -26,6 +30,7 @@
 - [File System Wallet](https://docs.solana.com/wallet-guide/file-system-wallet)
 - [Install the Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
 - [How To Transfer Eth Assets to Solana Using Wormhole ](https://blog.mercurial.finance/how-to-transfer-eth-assets-to-solana-using-wormhole-v2-514e728dc4fc)
+- [Neon](https://docs.neon-labs.org/docs/intro)
 
 ## Installation
 
