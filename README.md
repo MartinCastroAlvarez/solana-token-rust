@@ -2,9 +2,18 @@
 
 ![sol](./sol.jpg)
 
+## TODO List
+
+- Moralis
+- Allow Permissions
+- Listening to Events
+- Write a Program in Rust
+- Deploy the Program
+
 ## Table of Contents
 
 - [References](#references)
+- [Running a Validator](#running-a-validator)
 - [Installation](#installation)
 - [Connecting a Wallet](#connecting-a-wallet)
 - [Creating a Token](#creating-a-token)
@@ -17,8 +26,13 @@
 - [Getting Started with MetaPlex](https://docs.metaplex.com/token-metadata/getting-started)
 - [File System Wallet](https://docs.solana.com/wallet-guide/file-system-wallet)
 - [Install the Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
+- [How To Transfer Eth Assets to Solana Using Wormhole ](https://blog.mercurial.finance/how-to-transfer-eth-assets-to-solana-using-wormhole-v2-514e728dc4fc)
 
 ## Installation
+
+#### [Python SDK](https://michaelhly.github.io/solana-py/)
+
+Installing the SDK is not recommended. It is just a wrapper for the OS `solana-cli` which captures the output on STDOUT and transforms it into Python code. However, if the `solana-cli` version is incompatible, it does not work properly.
 
 #### Install the Solana release v1.9.8 on your machine:
 ```bash
@@ -32,6 +46,10 @@ solana --version
 ```bash
 solana-cli 1.9.8 (src:4ebeb336; feat:2191737503)
 ```
+
+## Running a Validator
+
+There is no need to run our own validator.
 
 ## Connecting a Wallet
 
