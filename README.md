@@ -84,7 +84,7 @@ Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLu
 
 ![wallet.png](./wallet.png)
 
-#### Connect to devnet
+#### Connect to the devnet cluster
 ```bash
 solana config set --url devnet
 ```
@@ -96,7 +96,9 @@ Keypair Path: key.json
 Commitment: confirmed 
 ```
 
-## Creating a new token
+![clusters.png](./clusters.png)
+
+## Creating a token
 
 #### Create a new token.
 ```bash
@@ -156,13 +158,6 @@ spl-token supply AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 300
 ```
 
-#### Open the account on the Solana explorer to check your balance
-
-- [mainet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8)
-- [devnet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8?cluster=devnet)
-
-![account.png](./account.png)
-
 #### Check your balance
 ```bash
 spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
@@ -171,7 +166,14 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 1000000
 ```
 
-## Creating a new NFT 
+#### Open the account on the Solana explorer to check your balance
+
+- [mainet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8)
+- [devnet](https://explorer.solana.com/address/6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8?cluster=devnet)
+
+![account.png](./account.png)
+
+## Creating an NFT 
 
 #### Create the new NFT.
 ```bash
@@ -218,13 +220,6 @@ Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 
 ![nft.png](./nft.png)
 
-#### Open the account on the Solana explorer to check your balance
-
-- [mainet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd)
-- [devnet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd?cluster=devnet)
-
-![account2.png](./account2.png)
-
 #### Check your balance
 ```bash
 spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
@@ -233,7 +228,20 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 1000000
 ```
 
-## Creating a new NFT 
+#### Open the account on the Solana explorer to check your balance
+
+- [mainet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd)
+- [devnet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd?cluster=devnet)
+
+![account2.png](./account2.png)
+
+
+
+
+
+
+
+
 
 ```bash
 git clone https://github.com/metaplex-foundation/metaplex.git
