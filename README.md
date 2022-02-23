@@ -65,6 +65,7 @@ curl -X GET "https://solana-gateway.moralis.io/account/devnet/GRbqKQ332wWMsFU43N
 #### Install the Solana release v1.9.8 on your machine:
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sh -c "$(curl -sSfL https://release.solana.com/v1.9.8/install)"
 ```
 
 #### Confirm you have the desired version of solana installed:
