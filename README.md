@@ -6,6 +6,9 @@
 
 - Find Open Sea for Solana
 - Find Bored Ape for Solana
+- Fractals.is
+
+- Metaplex. Candy Machine.
 - Find out how to send money from the person to the buyer; and the NFT to the buyer. Does the seller have to allow us to transfer their NFT? 
 
 - Check allowance
@@ -43,6 +46,7 @@
 - [How To Transfer Eth Assets to Solana Using Wormhole ](https://blog.mercurial.finance/how-to-transfer-eth-assets-to-solana-using-wormhole-v2-514e728dc4fc)
 - [Neon](https://docs.neon-labs.org/docs/intro)
 - [Creating an NFT on Solana with Metaplex Candy Machine](https://dev.to/devindxdeveloper/creating-an-nft-on-solana-with-metaplex-candy-machine-4agp)
+- [fractals.is](https://www.fractal.is/)
 
 ## Installation
 
