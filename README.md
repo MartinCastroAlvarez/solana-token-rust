@@ -13,6 +13,8 @@
 
 - NFT URI
 
+- Get transactions per Account (mint, transfer, buy, etc)
+
 - Listening to Events
 
 - Write a Program in Rust
