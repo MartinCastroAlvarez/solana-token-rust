@@ -126,14 +126,6 @@ Keypair Path: key.json
 Commitment: confirmed 
 ```
 
-#### Add SOL to your wallet on devnet
-```bash
-solana airdrop 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 
-```
-```bash
-Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLukP5uHE9SnB9e86Ni8Nu
-```
-
 #### Open the wallet on the Solana explorer
 
 - [mainet](https://explorer.solana.com/address/GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3)
@@ -154,6 +146,14 @@ Commitment: confirmed
 ```
 
 ![clusters.png](./clusters.png)
+
+#### Add SOL to your wallet on devnet
+```bash
+solana airdrop 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 
+```
+```bash
+Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLukP5uHE9SnB9e86Ni8Nu
+```
 
 ## Creating a Token
 
