@@ -4,10 +4,6 @@
 
 ## TODO List
 
-- Find Open Sea for Solana
-- Find Bored Ape for Solana
-- Fractals.is
-
 - Metaplex. Candy Machine.
 - Find out how to send money from the person to the buyer; and the NFT to the buyer. Does the seller have to allow us to transfer their NFT? 
 
@@ -31,6 +27,7 @@
 
 - [References](#references)
 - [Running a Validator](#running-a-validator)
+- [Fractals](#fractals)
 - [Installation](#installation)
 - [Connecting a Wallet](#connecting-a-wallet)
 - [Creating a Token](#creating-a-token)
@@ -47,6 +44,33 @@
 - [Neon](https://docs.neon-labs.org/docs/intro)
 - [Creating an NFT on Solana with Metaplex Candy Machine](https://dev.to/devindxdeveloper/creating-an-nft-on-solana-with-metaplex-candy-machine-4agp)
 - [fractals.is](https://www.fractal.is/)
+
+## Fractals
+
+#### Visit [https://www.fractal.is/](https://www.fractal.is/)
+
+![fractals1.png](./fractals1.png)
+
+#### Look at the latest NFTs
+
+![fractals2.png](./fractals2.png)
+
+#### Visit [NEKO #591](https://www.fractal.is/4809210122469376/5074427943321600/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
+
+![fractals3.png](./fractals3.png)
+
+#### Look at the transactions associated with the token
+
+![fractals4.png](./fractals4.png)
+
+#### Visit the [Solana Explorer](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
+
+![fractals5.png](./fractals5.png)
+
+#### Look at the [Metadata](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/metadata)
+
+![fractals6.png](./fractals6.png)
+
 
 ## Installation
 
