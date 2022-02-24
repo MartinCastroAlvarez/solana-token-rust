@@ -44,6 +44,9 @@
 - [Neon](https://docs.neon-labs.org/docs/intro)
 - [Creating an NFT on Solana with Metaplex Candy Machine](https://dev.to/devindxdeveloper/creating-an-nft-on-solana-with-metaplex-candy-machine-4agp)
 - [fractals.is](https://www.fractal.is/)
+- [Solana Discord Channel](https://discord.com/invite/solana)
+- [Token Metadata](https://docs.metaplex.com/token-metadata/getting-started)
+- [Cargo Installation](https://doc.rust-lang.org/cargo/getting-started/installation.html)
 
 ## Fractals
 
@@ -71,6 +74,11 @@
 
 ![fractals6.png](./fractals6.png)
 
+#### Look at the [Instructions](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/instructions)
+
+![fractals7.png](./fractals7.png)
+
+
 
 ## Installation
 
@@ -93,18 +101,44 @@ curl -X GET "https://solana-gateway.moralis.io/account/devnet/GRbqKQ332wWMsFU43N
 
 ![moralis.png](./moralis.png)
 
-#### Install the Solana release v1.9.8 on your machine:
+#### Install the Solana release v1.9.8 on your machine
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sh -c "$(curl -sSfL https://release.solana.com/v1.9.8/install)"
+source $HOME/.cargo/env
 ```
 
-#### Confirm you have the desired version of solana installed:
+#### Confirm that Rust was installed
+```bash
+rustc --version
+```
+```bash
+rustc 1.59.0 (9d1b2106e 2022-02-23)
+```
+
+#### Confirm that Cargo was intsalled
+```bash
+cargo -V
+```
+```bash
+cargo 1.59.0 (49d8809dc 2022-02-10)
+```
+
+#### Confirm you have the desired version of solana installed
 ```bash
 solana --version
 ```
 ```bash
 solana-cli 1.9.8 (src:4ebeb336; feat:2191737503)
+```
+
+#### Install Metaplex
+```bash
+git clone https://github.com/metaplex-foundation/metaplex.git
+cd metaplex
+git checkout v1.1.1
+cd js && yarn install && yarn bootstrap
+cd packages/cli
 ```
 
 ## Running a Validator
@@ -204,7 +238,7 @@ Signature: 44CPkEej8Mz2okM41673XGWDmARpykn7gfFEzySSmj51vhYivmwkJycCVV1Xdno3MzexQ
 
 ![token.png](./token.png)
 
-#### Create an account on your wallet to hold the NFT
+#### Create an account on your wallet to hold the token
 ```bash
 spl-token create-account AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 ```
@@ -442,6 +476,14 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv29
 1
 ```
 
+#### Visit [Solscan](https://solscan.io/token/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB?cluster=devnet#txs) to look at your NFT
+
+![solscan1.png](./solscan1.png)
+
+#### Open the [Transaction](https://solscan.io/tx/2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2?cluster=devnet) to look at the Token Balance Change 
+
+![solscan2.png](./solscan2.png)
+
 #### Allow another account to transfer the NFT on your behalf
 ```bash
 spl-token approve Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json
@@ -453,6 +495,7 @@ Approve 1 tokens
 ```
 
 #### Use your approval to transfer the NFT on behalf of the other account
+TODO
 ```bash
 spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd 
 ```
