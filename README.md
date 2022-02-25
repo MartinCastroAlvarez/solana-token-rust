@@ -646,7 +646,7 @@ edition = "2021"
 ```
 
 #### 11.1.3 Edit the [main.rs](./hello/src/main.rs) program file
-```bash
+```rust
 fn main() {
     println!("Hello, world!");
 }
@@ -693,9 +693,8 @@ edition = "2021"
 ```
 
 #### 11.2.3 Edit the [main.rs](./args/src/main.rs) program file
-```bash
+```rust
 use std::env::{args, Args};
-
 fn main() {
     let mut args: Args = args();
     let first: String = args.nth(1).unwrap();
@@ -713,4 +712,98 @@ cargo run -- lorem ipsum dolor
     Finished dev [unoptimized + debuginfo] target(s) in 0.00s
      Running `target/debug/nisman lorem ipsum dolor`
 Hello, "lorem" "ipsum" "dolor"!
+```
+
+### 11.3 Art Example
+
+#### 11.3.1 Create a new project
+```bash
+cargo new art
+cd art
+```
+```bash
+Created binary (application) `art` package
+```
+
+#### 11.3.2 Edit the [Cargo.toml](./art/Cargo.toml) manifest file
+```bash
+[package]
+name = "art"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+```
+
+#### 11.3.3 Edit the [data.rs](./art/src/data.rs) program file which contains the Structs
+```rust
+#[derive(Debug, Clone)]
+pub struct Person {
+    pub name: String,
+    pub phone: u32 
+}
+
+#[derive(Debug, Clone)]
+pub enum Category {
+    Image,
+    Video
+}
+
+#[derive(Debug, Clone)]
+pub struct Art {
+    pub name: String,
+    pub price: u64,
+    pub owner: Person,
+    pub creator: Person
+}
+```
+
+#### 11.3.4 Edit the [main.rs](./art/src/main.rs) program file
+```rust
+mod data;
+use data::Art;
+use data::Person;
+use data::Category;
+
+fn main() {
+    let image: Art = Art {
+        name: String::from("Dolor"),
+        price: 128319823.try_into().unwrap(),
+        creator: Person {
+            name: String::from("Lorem"),
+            phone: 123125.try_into().unwrap()
+        },
+        owner: Person {
+            name: String::from("Ipsum"),
+            phone: 58332394.try_into().unwrap()
+        },
+        category: Category::Image
+    };
+    let video: Art = Art {
+        name: String::from("Dolor"),
+        price: 128319823.try_into().unwrap(),
+        creator: Person {
+            name: String::from("Lorem"),
+            phone: 123125.try_into().unwrap()
+        },
+        owner: Person {
+            name: String::from("Ipsum"),
+            phone: 58332394.try_into().unwrap()
+        },
+        category: Category::Video
+    };
+    println!("Image: {:?}", image);
+    println!("Video: {:?}", video);
+}
+```
+
+#### 11.4.5 Compile and run the program
+```bash
+cargo run -- lorem ipsum dolor
+```
+```bash
+   Compiling art v0.1.0 (/home/martinalejandrocastroalvarez/contract/art)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.27s
+     Running `target/debug/art`
+Image: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", phone: 58332394 }, creator: Person { name: "Lorem", phone: 123125 }, category: Image }
+Video: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", phone: 58332394 }, creator: Person { name: "Lorem", phone: 123125 }, category: Video }
 ```
