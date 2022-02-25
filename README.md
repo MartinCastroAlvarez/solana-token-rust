@@ -4,36 +4,30 @@
 
 ## TODO List
 
+- NFT URI (Token Metadata Program)
 - Metaplex. Candy Machine.
 - Find out how to send money from the person to the buyer; and the NFT to the buyer. Does the seller have to allow us to transfer their NFT? 
 
-- Check allowance
-- Transfer on behalf of a different User
+- Check allowance (cli)
+- Transfer on behalf of a different User (cli)
 
-- NFT URI
+- Get transaction details (cli)
 
-- Get transactions per Account (mint, transfer, buy, etc)
-
-- Listening to Events
-
-- Write a Program in Rust
-- Deploy the Program
-
-- Check account transactions
+- Deploy Rust Program to the blockchain
 - Wormhole/Vortex
-- Neon
 
 ## Table of Contents
 
 - [References](#references)
-- [Running a Validator](#running-a-validator)
-- [Fractals](#fractals)
+- [Fractals Marketplace](#fractals-marketplace)
 - [Installation](#installation)
+- [Running a Validator](#running-a-validator)
 - [Connecting a Wallet](#connecting-a-wallet)
 - [Creating a Token](#creating-a-token)
 - [Creating an NFT](#creating-an-nft)
 - [Listing the Token](#listing-the-token)
-- [Allowing other Accounts](#allowing-other-accounts)
+- [Transferring Tokens](#transferring-tokens)
+- [Rust Development](#rust-development)
 
 ## References
 
@@ -48,7 +42,7 @@
 - [Token Metadata](https://docs.metaplex.com/token-metadata/getting-started)
 - [Cargo Installation](https://doc.rust-lang.org/cargo/getting-started/installation.html)
 
-## Fractals
+## Fractals Marketplace
 
 #### Visit [https://www.fractal.is/](https://www.fractal.is/)
 
@@ -78,8 +72,6 @@
 
 ![fractals7.png](./fractals7.png)
 
-
-
 ## Installation
 
 #### [Python SDK](https://michaelhly.github.io/solana-py/)
@@ -100,6 +92,12 @@ curl -X GET "https://solana-gateway.moralis.io/account/devnet/GRbqKQ332wWMsFU43N
 ```
 
 ![moralis.png](./moralis.png)
+
+#### [Neon](https://neon-labs.org/)
+
+This tool provides an abstraction layer which provides an Ethereum-like interface to the Solana network.
+
+![neon.png](./neon.png)
 
 #### Install the Solana release v1.9.8 on your machine
 ```bash
@@ -144,6 +142,60 @@ cd packages/cli
 ## Running a Validator
 
 There is no need to run our own validator.
+
+Most commands have this flag to wait for confirmation before returning.
+
+```bash
+spl-token transfer --help
+```
+```bash
+[...]
+    --no-wait   Return signature immediately after submitting the transaction,
+                instead of waiting for confirmations.
+[...]
+```
+
+#### Watch for logs in real time. It generates ~10.000 lines in 5 seconds.
+```bash
+solana logs | tee test.log
+```
+```bash
+Transaction executed in slot 116878215:
+  Signature: 53gEBYVA453FhxButWmfZb8Nkj8c19eUKkqE9FMZZ1kHPHF5gXkmzZ5wPVFxVXu2qAzKDQKsgxfU5apzTpnufj1G
+  Status: Ok
+  Log Messages:
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2506 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2496 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2511 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2494 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2555 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2535 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2557 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 2537 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s success
+Transaction executed in slot 116878215:
+  Signature: 3LvGbTSNeb6jZ5hhW7GgagXGzMg5DtrRuaRVeRqWaDQEJ9VzYjo9psrDX7yDEqYWw6pmETJVMGMKKhNp8Y68JKEP
+  Status: Error processing Instruction 0: invalid program argument
+  Log Messages:
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s invoke [1]
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s consumed 594 of 200000 compute units
+    Program gSbePebfvPy7tRqimPoVecS2UsBvYv46ynrzWocc92s failed: invalid program argument
+```
 
 ## Connecting a Wallet
 
@@ -214,7 +266,7 @@ Commitment: confirmed
 
 #### Add SOL to your wallet on devnet
 ```bash
-solana airdrop 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 
+solana airdrop 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
 ```
 ```bash
 Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLukP5uHE9SnB9e86Ni8Nu
@@ -224,7 +276,7 @@ Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLu
 
 #### Create a new token
 ```bash
-spl-token create-token --decimals 10
+spl-token create-token --decimals 10 --owner ./key.json
 ```
 ```bash
 Creating token AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 
@@ -240,7 +292,7 @@ Signature: 44CPkEej8Mz2okM41673XGWDmARpykn7gfFEzySSmj51vhYivmwkJycCVV1Xdno3MzexQ
 
 #### Create an account on your wallet to hold the token
 ```bash
-spl-token create-account AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+spl-token create-account AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn --owner ./key.json
 ```
 ```bash
 Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
@@ -254,7 +306,7 @@ Error: Account already exists: 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
 
 #### Mint token
 ```bash
-spl-token mint AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 1000000
+spl-token mint AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 1000000 --owner ./key.json
 ```
 ```bash
 Minting 1000000 tokens
@@ -264,7 +316,7 @@ Minting 1000000 tokens
 
 #### Disable minting to set the token supply
 ```bash
-spl-token authorize AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn mint --disable
+spl-token authorize AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn mint --disable --owner ./key.json
 ```
 ```bash
 Updating AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
@@ -282,7 +334,7 @@ spl-token supply AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 
 #### Check your balance
 ```bash
-spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
+spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn --owner ./key.json
 ```
 ```bash
 1000000
@@ -299,7 +351,7 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn
 
 #### Create the new NFT
 ```bash
-spl-token create-token --decimals 0
+spl-token create-token --decimals 0 --owner ./key.json
 ```
 ```bash
 Creating token 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
@@ -308,7 +360,7 @@ Signature: 45bawtJRWxLRcPRqnqe2mxsmXosnnR3wfXi2kFntppYZzTe8naphHH5yLLiWz7mx528Nk
 
 #### Create an account on your wallet to hold the NFT
 ```bash
-spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
 ```
 ```bash
 Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
@@ -317,7 +369,7 @@ Signature: 4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H
 
 #### Mint 10 editions
 ```bash
-spl-token mint 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 10
+spl-token mint 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 10 --owner ./key.json
 ```
 ```bash
 Minting 10 tokens
@@ -327,7 +379,7 @@ Minting 10 tokens
 
 #### Disable minting to set the token supply
 ```bash
-spl-token authorize 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB mint --disable
+spl-token authorize 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB mint --disable --owner ./key.json
 ```
 ```bash
 Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
@@ -344,7 +396,7 @@ Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 
 #### Check your balance
 ```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
 ```
 ```bash
 10
@@ -352,7 +404,7 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
 
 #### Check your portfolio
 ```bash
-spl-token accounts 
+spl-token accounts  --owner ./key.json
 ```
 ```bash
 Token                                         Balance
@@ -443,6 +495,26 @@ cat other.json
 [53,55,82,181,90,137,126,208,219,71,54,77,119,145,77,88,5,103,208,217,10,218,187,210,47,131,48,215,123,226,223,110,147,227,22,153,66,69,41,186,253,0,224,158,116,81,90,102,12,218,125,243,30,144,25,89,122,152,197,55,190,90,78,215]
 ```
 
+#### Add SOL to your wallet on devnet
+```bash
+solana airdrop 1 AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+```
+```bash
+Signature: 32Gk4dp9YZ4jrx8rdvUUisyJWi9cNSppNW3c6EEmcizvryEQ69GjEBBE9u4nTXy1bjUBwgjBZpU7sZ9uQSADmt9C
+```
+
+#### Fetching the wallet info
+```bash
+solana account AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+```
+```bash
+Public Key: AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+Balance: 1 SOL
+Owner: 11111111111111111111111111111111
+Executable: false
+Rent Epoch: 270
+```
+
 #### Create an account for the other account
 ```bash
 spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner other.json
@@ -454,7 +526,7 @@ Signature: UhR64tVJzEWPvAsVJJCnAKV7nSgc7ZMrPGyt28sYEKv26hGhjp8j7jK4wDAcif5BEKx5H
 
 #### Transfer a release into the new account
 ```bash
-spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ --owner ./key.json
 ```
 ```bash
 Transfer 1 tokens
@@ -464,7 +536,7 @@ Transfer 1 tokens
 
 #### Check the new balance
 ```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
 ```
 ```bash
 9
@@ -476,6 +548,36 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv29
 1
 ```
 
+#### Check the latest transactions associated with the token
+```bash
+solana transaction-history y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+```
+```bash
+4GNB2eCzsXh2ooPNN7iNzArpNXeAMNcBnBrhHG7aw4VxsnFFWFGHnRaNAn2gM8S8nVKRzHDNL2tttV9AVcNAf9oW
+2Jwve2yM79EguUzoEg8TptomsgGaWLEJTy5uEbyB3q3cuADJZ2gYAFYSntZ8CE9TCDBGy9Ga151nKcRKFddFsmow
+5LqDVwxHDK3U2KfzuykqYaQ8UKGhkfFggQfiqfGHAka3wEREjZHhP9492DwqhLSLLVPZgDKH9byMhi7YoUV8G9py
+2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2
+6mZPD17kUyk1W5ZssNZ8bezPedznGKE5dfCPyeRgWbYm4ejQoNsjA1XUGotPFTaPNfnyNSCim3FsioMwYXLVCsY
+5xjn4CAKryxJnA1dMZwonpQzvwsCegGj7hCt8iXbWB4ifuZ3hFKPd2j2GvcE1fVHPHbmJCaNhr3GJHxscYBYCTvq
+4CbHsyA5SqrxAJgVBVynuJBovGSoZYAfZ2qwD8bWLvYRN73L2abZNMDRSQgBwhVX27qxyRhESXxGgrjh9hmmxHbx
+3vLhCaDVeJziw9tcNRSrS2CHz5G5FJWyUsX1RZXZEyd3UPBvTD9pQJiobXwtP5ibCx79TzDRkWGULRE28F1c3Lyk
+4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H6GpiBZFFwqJioZqXWrh
+9 transactions found
+```
+
+#### Check the latest transactions associated with the receiver
+```bash
+solana transaction-history AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+```
+```bash
+2Jwve2yM79EguUzoEg8TptomsgGaWLEJTy5uEbyB3q3cuADJZ2gYAFYSntZ8CE9TCDBGy9Ga151nKcRKFddFsmow
+2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2
+6mZPD17kUyk1W5ZssNZ8bezPedznGKE5dfCPyeRgWbYm4ejQoNsjA1XUGotPFTaPNfnyNSCim3FsioMwYXLVCsY
+5xjn4CAKryxJnA1dMZwonpQzvwsCegGj7hCt8iXbWB4ifuZ3hFKPd2j2GvcE1fVHPHbmJCaNhr3GJHxscYBYCTvq
+UhR64tVJzEWPvAsVJJCnAKV7nSgc7ZMrPGyt28sYEKv26hGhjp8j7jK4wDAcif5BEKx5HvApSA6HdE4sqTGyfD3
+5 transactions found
+```
+
 #### Visit [Solscan](https://solscan.io/token/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB?cluster=devnet#txs) to look at your NFT
 
 ![solscan1.png](./solscan1.png)
@@ -483,6 +585,7 @@ spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv29
 #### Open the [Transaction](https://solscan.io/tx/2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2?cluster=devnet) to look at the Token Balance Change 
 
 ![solscan2.png](./solscan2.png)
+
 
 #### Allow another account to transfer the NFT on your behalf
 ```bash
@@ -492,25 +595,115 @@ spl-token approve Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ 1 y1tHVi5L4yxBXYt
 Approve 1 tokens
   Account: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
   Delegate: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+Signature: U2yxzLAx57NYA4fYNq7QY5GG2aV15qCWjNHUAh2cbM2DozjbHJzpFoxA6KBYr6XX3hRMpjj9L6n6pubi7hGEPgd
 ```
 
 #### Use your approval to transfer the NFT on behalf of the other account
+```bash
+spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json --from Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json --from Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+```
+```bash
 TODO
-```bash
-spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd 
-```
-```bash
-Approve 1 tokens
-  Account: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
-  Delegate: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
 ```
 
-Creating account 6WbLiFB765NT3RXBUNxzvFkitPmiBuyDTLpiuP6G2Hh8
-Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
-Creating account Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+#### Check the balance of the sender
+```bash
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
+spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./other.json
+```
+```bash
+TODO
+```
 
+## Rust Development
 
-## Allowing other Accounts
+### Hello World Example
 
-- [Solana allowing other wallet to mint or transfer token from my wallet](https://stackoverflow.com/questions/70862412/solana-allowing-other-wallet-to-mint-or-transfer-token-from-my-wallet)
+#### Create a new project
+```bash
+cargo new hello
+cd hello
+```
+```bash
+Created binary (application) `hello` package
+```
 
+#### Edit the [Cargo.toml](./hello/Cargo.toml) manifest file
+```bash
+[package]
+name = "hello"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+```
+
+#### Edit the [main.rs](./hello/src/main.rs) program file
+```bash
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+#### Compile and run the program
+```bash
+cargo run
+```
+```bash
+Compiling hello v0.1.0 (/home/martinalejandrocastroalvarez/contract/hello)
+Finished dev [unoptimized + debuginfo] target(s) in 1.50s
+    Running `target/debug/hello
+Hello, world!
+```
+
+#### Compile the program and run the executable file
+```bash
+rustc ./src/main.rs 
+./main
+```
+```bash
+Hello, world!
+```
+
+### Arguments Example
+
+#### Create a new project
+```bash
+cargo new args
+cd args
+```
+```bash
+Created binary (application) `args` package
+```
+
+#### Edit the [Cargo.toml](./args/Cargo.toml) manifest file
+```bash
+[package]
+name = "args"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+```
+
+#### Edit the [main.rs](./args/src/main.rs) program file
+```bash
+use std::env::{args, Args};
+
+fn main() {
+    let mut args: Args = args();
+    let first: String = args.nth(1).unwrap();
+    let second: String = args.nth(0).unwrap();
+    let third: String = args.nth(0).unwrap();
+    println!("Hello, {:?} {:?} {:?}!", first, second, third);
+}
+```
+
+#### Compile and run the program
+```bash
+cargo run -- lorem ipsum dolor
+```
+```bash
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/nisman lorem ipsum dolor`
+Hello, "lorem" "ipsum" "dolor"!
+```
