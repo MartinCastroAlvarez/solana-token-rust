@@ -16,20 +16,21 @@
 - Deploy Rust Program to the blockchain
 - Wormhole/Vortex
 
-## Table of Contents
+## 1 Table of Contents
 
-- [References](#references)
-- [Fractals Marketplace](#fractals-marketplace)
-- [Installation](#installation)
-- [Running a Validator](#running-a-validator)
-- [Connecting a Wallet](#connecting-a-wallet)
-- [Creating a Token](#creating-a-token)
-- [Creating an NFT](#creating-an-nft)
-- [Listing the Token](#listing-the-token)
-- [Transferring Tokens](#transferring-tokens)
-- [Rust Development](#rust-development)
+- [1 Table of Contents](#1-table-of-contents)
+- [2 References](#2-references)
+- [3 Fractals Marketplace](#3-fractals-marketplace)
+- [4 Installation](#4-installation)
+- [5 Running a Validator](#5-running-a-validator)
+- [6 Connecting a Wallet](#6-connecting-a-wallet)
+- [7 Creating a Token](#7-creating-a-token)
+- [8 Creating an NFT](#8-creating-an-nft)
+- [9 Listing the Token](#9-listing-the-token)
+- [10 Transferring Tokens](#10-transferring-tokens)
+- [11 Rust Development](#11-rust-development)
 
-## References
+## 2 References
 
 - [Getting Started with MetaPlex](https://docs.metaplex.com/token-metadata/getting-started)
 - [File System Wallet](https://docs.solana.com/wallet-guide/file-system-wallet)
@@ -42,43 +43,43 @@
 - [Token Metadata](https://docs.metaplex.com/token-metadata/getting-started)
 - [Cargo Installation](https://doc.rust-lang.org/cargo/getting-started/installation.html)
 
-## Fractals Marketplace
+## 3 Fractals Marketplace
 
-#### Visit [https://www.fractal.is/](https://www.fractal.is/)
+#### 3.1 Visit [https://www.fractal.is/](https://www.fractal.is/)
 
 ![fractals1.png](./fractals1.png)
 
-#### Look at the latest NFTs
+#### 3.2 Look at the latest NFTs
 
 ![fractals2.png](./fractals2.png)
 
-#### Visit [NEKO #591](https://www.fractal.is/4809210122469376/5074427943321600/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
+#### 3.3 Visit [NEKO #591](https://www.fractal.is/4809210122469376/5074427943321600/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
 
 ![fractals3.png](./fractals3.png)
 
-#### Look at the transactions associated with the token
+#### 3.4 Look at the transactions associated with the token
 
 ![fractals4.png](./fractals4.png)
 
-#### Visit the [Solana Explorer](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
+#### 3.5 Visit the [Solana Explorer](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8)
 
 ![fractals5.png](./fractals5.png)
 
-#### Look at the [Metadata](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/metadata)
+#### 3.6 Look at the [Metadata](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/metadata)
 
 ![fractals6.png](./fractals6.png)
 
-#### Look at the [Instructions](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/instructions)
+#### 3.7 Look at the [Instructions](https://explorer.solana.com/address/AU89dkTtXt8GBaTt6e4LE35rQeztWaSS6CJ3Ny1XFn8/instructions)
 
 ![fractals7.png](./fractals7.png)
 
-## Installation
+## 4 Installation
 
-#### [Python SDK](https://michaelhly.github.io/solana-py/)
+### 4.1 [Python SDK](https://michaelhly.github.io/solana-py/)
 
 Installing the SDK is not recommended. It is just a wrapper for the OS `solana-cli` which captures the output on STDOUT and transforms it into Python code. However, if the `solana-cli` version is incompatible, it does not work properly.
 
-#### [moralis.io](https://moralis.io/moralis-releases-solana-api/)
+### 4.2 [moralis.io](https://moralis.io/moralis-releases-solana-api/)
 
 It can can be used to interact with the Blockchain. For example:
 ```bash
@@ -93,20 +94,22 @@ curl -X GET "https://solana-gateway.moralis.io/account/devnet/GRbqKQ332wWMsFU43N
 
 ![moralis.png](./moralis.png)
 
-#### [Neon](https://neon-labs.org/)
+### 4.3 [Neon](https://neon-labs.org/)
 
 This tool provides an abstraction layer which provides an Ethereum-like interface to the Solana network.
 
 ![neon.png](./neon.png)
 
-#### Install the Solana release v1.9.8 on your machine
+### 4.4 Local Development
+
+#### 4.4.1 Install the Solana release v1.9.8 on your machine
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sh -c "$(curl -sSfL https://release.solana.com/v1.9.8/install)"
 source $HOME/.cargo/env
 ```
 
-#### Confirm that Rust was installed
+#### 4.4.2 Confirm that Rust was installed
 ```bash
 rustc --version
 ```
@@ -114,7 +117,7 @@ rustc --version
 rustc 1.59.0 (9d1b2106e 2022-02-23)
 ```
 
-#### Confirm that Cargo was intsalled
+#### 4.4.3 Confirm that Cargo was intsalled
 ```bash
 cargo -V
 ```
@@ -122,7 +125,7 @@ cargo -V
 cargo 1.59.0 (49d8809dc 2022-02-10)
 ```
 
-#### Confirm you have the desired version of solana installed
+#### 4.4.4 Confirm you have the desired version of solana installed
 ```bash
 solana --version
 ```
@@ -130,7 +133,7 @@ solana --version
 solana-cli 1.9.8 (src:4ebeb336; feat:2191737503)
 ```
 
-#### Install Metaplex
+#### 4.4.5 Metaplex
 ```bash
 git clone https://github.com/metaplex-foundation/metaplex.git
 cd metaplex
@@ -139,9 +142,11 @@ cd js && yarn install && yarn bootstrap
 cd packages/cli
 ```
 
-## Running a Validator
+## 5 Running a Validator
 
 There is no need to run our own validator.
+
+#### 5.1 Synchronous Commands
 
 Most commands have this flag to wait for confirmation before returning.
 
@@ -155,7 +160,7 @@ spl-token transfer --help
 [...]
 ```
 
-#### Watch for logs in real time. It generates ~10.000 lines in 5 seconds.
+#### 5.2 Watch for logs in real time. It generates ~10.000 lines in 5 seconds.
 ```bash
 solana logs | tee test.log
 ```
