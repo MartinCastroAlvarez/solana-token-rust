@@ -7,6 +7,8 @@
 - NFT URI (Token Metadata Program)
 - Metaplex. Candy Machine.
 
+- Auction Program
+
 - Publish logo to solana-labs
 
 - Check allowance (cli)
@@ -30,6 +32,7 @@
 - [9 Listing the Token](#9-listing-the-token)
 - [10 Transferring Tokens](#10-transferring-tokens)
 - [11 Rust Development](#11-rust-development)
+- [12 Deploying a Program](#12-deploying-a-program)
 
 ## 2 References
 
@@ -43,6 +46,7 @@
 - [Solana Discord Channel](https://discord.com/invite/solana)
 - [Token Metadata](https://docs.metaplex.com/token-metadata/getting-started)
 - [Cargo Installation](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- [Deploy a Program](https://docs.solana.com/cli/deploy-a-program)
 
 ## 3 Fractals Marketplace
 
@@ -662,15 +666,6 @@ Finished dev [unoptimized + debuginfo] target(s) in 1.50s
 Hello, world!
 ```
 
-#### 11.1.5 Compile the program and run the executable file
-```bash
-rustc ./src/main.rs 
-./main
-```
-```bash
-Hello, world!
-```
-
 ### 11.2 Arguments Example
 
 #### 11.2.1 Create a new project
@@ -815,4 +810,36 @@ Image: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", pho
 Video: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", phone: 58332394 }, creator: Person { name: "Lorem", phone: 123125 }, category: Video }
 Image Price: 128319823
 Video Price: 128319823
+```
+
+## 12 Deploying a Program
+
+#### 12.1 Create a new project
+```bash
+cargo new contract
+cd contract
+```
+```bash
+Created binary (application) `contract` package
+```
+
+#### 12.2 Edit the [Cargo.toml](./contract/Cargo.toml) manifest file
+
+#### 12.3 Edit the [main.rs](./contract/src/main.rs) program file
+
+#### 12.4 Creating a release
+```bash
+cargo build --release
+```
+```bash
+TODO
+```
+
+#### 12.4 Compile the program and run the executable file
+```bash
+rustc ./src/main.rs 
+./main
+```
+```bash
+TODO
 ```
