@@ -18,3 +18,9 @@ pub struct Art {
     pub creator: Person,
     pub category: Category
 }
+
+impl Art {
+    pub fn get_price(&self) -> u64 {
+        self.price
+    }
+}

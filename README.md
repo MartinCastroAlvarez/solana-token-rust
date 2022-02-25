@@ -6,7 +6,6 @@
 
 - NFT URI (Token Metadata Program)
 - Metaplex. Candy Machine.
-- Find out how to send money from the person to the buyer; and the NFT to the buyer. Does the seller have to allow us to transfer their NFT? 
 
 - Publish logo to solana-labs
 
@@ -755,6 +754,12 @@ pub struct Art {
     pub owner: Person,
     pub creator: Person
 }
+
+impl Art {
+    pub fn get_price(&self) -> u64 {
+        self.price
+    }
+}
 ```
 
 #### 11.3.4 Edit the [main.rs](./art/src/main.rs) program file
@@ -793,6 +798,8 @@ fn main() {
     };
     println!("Image: {:?}", image);
     println!("Video: {:?}", video);
+    println!("Image Price: {:?}", video.get_price());
+    println!("Video Price: {:?}", image.get_price());
 }
 ```
 
@@ -806,4 +813,6 @@ cargo run -- lorem ipsum dolor
      Running `target/debug/art`
 Image: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", phone: 58332394 }, creator: Person { name: "Lorem", phone: 123125 }, category: Image }
 Video: Art { name: "Dolor", price: 128319823, owner: Person { name: "Ipsum", phone: 58332394 }, creator: Person { name: "Lorem", phone: 123125 }, category: Video }
+Image Price: 128319823
+Video Price: 128319823
 ```

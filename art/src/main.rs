@@ -32,4 +32,6 @@ fn main() {
     };
     println!("Image: {:?}", image);
     println!("Video: {:?}", video);
+    println!("Image Price: {:?}", video.get_price());
+    println!("Video Price: {:?}", image.get_price());
 }
