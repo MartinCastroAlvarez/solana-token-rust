@@ -2,23 +2,6 @@
 
 ![sol](./sol.jpg)
 
-## TODO List
-
-- NFT URI (Token Metadata Program)
-- Metaplex. Candy Machine.
-
-- Auction Program
-
-- Publish logo to solana-labs
-
-- Check allowance (cli)
-- Transfer on behalf of a different User (cli)
-
-- Get transaction details (cli)
-
-- Deploy Rust Program to the blockchain
-- Wormhole/Vortex
-
 ## 1 Table of Contents
 
 - [1 Table of Contents](#1-table-of-contents)
@@ -144,7 +127,7 @@ git clone https://github.com/metaplex-foundation/metaplex.git
 cd metaplex
 git checkout v1.1.1
 cd js && yarn install && yarn bootstrap
-cd packages/cli
+npm install -g typescript
 ```
 
 ## 5 Running a Validator
@@ -359,78 +342,154 @@ spl-token balance AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn --owner ./key.jso
 
 ## 8 Creating an NFT 
 
-#### 8.1 Create the new NFT
-```bash
-spl-token create-token --decimals 0 --owner ./key.json
-```
-```bash
-Creating token 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
-Signature: 45bawtJRWxLRcPRqnqe2mxsmXosnnR3wfXi2kFntppYZzTe8naphHH5yLLiWz7mx528NkqUwUiEafkmF1uTwXJdj
-```
-
-#### 8.2 Create an account on your wallet to hold the NFT
-```bash
-spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
-```
-```bash
-Creating account y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
-Signature: 4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H6GpiBZFFwqJioZqXWrh
-```
-
-#### 8.3 Mint 10 editions
-```bash
-spl-token mint 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 10 --owner ./key.json
-```
-```bash
-Minting 10 tokens
-  Token: 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
-  Recipient: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
-```
-
-#### 8.4 Disable minting to set the token supply
-```bash
-spl-token authorize 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB mint --disable --owner ./key.json
-```
-```bash
-Updating 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB
-  Current mint authority: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
-  New mint authority: disabled
+#### 8.1 Create a [config file](./assets/0.json) according to the [Token Metadata Program](https://docs.metaplex.com/token-metadata/specification)
+```javascript
+{
+  "name": "Nisman",
+  "symbol": "",
+  "description": "Lorem Ipsum Dolor",
+  "image": "0.jpeg",
+  "animation_image": "0.jpeg",
+  "external_url": "0.jpeg",
+  "attributes": [
+    {
+      "trait_type": "attack",
+      "value": "4"
+    },
+    {
+      "trait_type": "defense",
+      "value": "3"
+    },
+    {
+      "trait_type": "durability",
+      "value": "47"
+    },
+    {
+      "trait_type": "components",
+      "value": "iron: 10; carbon: 1; wood: 2"
+    }
+  ]
+}
 ```
 
-#### 8.5 Open the NFT on the Solana explorer
+#### 8.2 Create an [image file](./assets/0.jpeg)
 
-- [mainet](https://explorer.solana.com/address/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB)
-- [devnet](https://explorer.solana.com/address/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB?cluster=devnet)
+![image](./assets/0.jpeg)
 
-![nft.png](./nft.png)
-
-#### 8.6 Check your balance
+#### 8.3 Create a [config file](./candy.json) for the Candy Machine
 ```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
+{
+    "price": 10.0,
+    "number": null,
+    "gatekeeper": null,
+    "solTreasuryAccount": "GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3",
+    "goLiveDate": "28 Feb 2022 00:00:00 GMT",
+    "storage": "nft-storage",
+    "awsS3Bucket": null,
+    "noRetainAuthority": true,
+    "noMutable": true,
+    "splTokenAccount": null,
+    "splToken": null,
+    "endSettings": null,
+    "whitelistMintSettings": null,
+    "hiddenSettings": null,
+    "ipfsInfuraProjectId": null,
+    "ipfsInfuraSecret": null,
+    "nftStorageKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDA2MDI0RGM0QmY2MUJiZjVEQjU1RkRFNGM4QzFkMGU0OTE5ZTI0MjgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0NjA5MTAxNDU5NywibmFtZSI6ImVzdCJ9.d9Ftb5H2Wd-Gs-0Jzk1ehG0LtjQiu5G_DVlM8TU8sew"
+}
+```
+
+#### 8.4 Use Metaplex to upload the config for the NFT(s)
+```bash
+npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts upload \
+    --env devnet --keypair ./key.json --config-path ./candy.json ./assets/
+eark``
+```bash
+wallet public key: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+Beginning the upload for 2 (img+json) pairs
+started at: 1646001449493
+initialized config for a candy machine with publickey: 8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri
+Uploading Size 0 { mediaExt: '.jpeg', index: '0' }
+Uploading Size 1 { mediaExt: '.jpeg', index: '1' }
+Done. Successful = true.
+ended at: 2022-02-27T22:37:29.499Z. time taken: 00:00:00
+```
+
+#### 8.5 Verify the upload using Metaplex
+```bash
+npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts verify_upload \
+    --env devnet --keypair ./key.json
 ```
 ```bash
-10
+wallet public key: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+Key size 10
+Looking at key  0
+Looking at key  1
+Looking at key  2
+Looking at key  3
+Looking at key  4
+Looking at key  5
+Looking at key  6
+Looking at key  7
+Looking at key  8
+Looking at key  9
+uploaded (10) out of (10)
+ready to deploy!
 ```
 
-#### 8.7 Check your portfolio
+#### 8.6 Confirm the images have been uploaded to [nft.storage](https://nft.storage/files/)
+
+![nft.storage](./storage.png)
+
+#### 8.7 Mint one token using Metaplex
 ```bash
-spl-token accounts  --owner ./key.json
+npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts mint_one_token \
+    --env devnet --keypair ./key.json
 ```
+```bash
+mint_one_token finished 2oy2UeJ7ajuSTdDRCGGfewo2LfYtdNfm1Pyhm4WrTWyGY2TK8hrCYkTJ9eL3sbMd3FhQrvmVjXrRgunhCpYwiv6C
+```
+
+#### 8.8 Check your 
+
+
+#### 8.9 Mint multiple tokens
+```bash
+npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts mint_one_token \
+    --env devnet --keypair ./key.json
+```
+```bash
+mint_one_token finished 2oy2UeJ7ajuSTdDRCGGfewo2LfYtdNfm1Pyhm4WrTWyGY2TK8hrCYkTJ9eL3sbMd3FhQrvmVjXrRgunhCpYwiv6C
+```
+
+#### 8.10 Open the Candy Machine output on the Solana explorer
+
+- [mainet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri)
+- [devnet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri?cluster=devnet)
+
+![candy1.png](./candy1.png)
+
+#### 8.11 Checking your balance 
 ```bash
 Token                                         Balance
 ---------------------------------------------------------------
+57LrgeQk19vkfQcwt9i4kcazHEpdW8P7PVxwqXLfmJr3  1      
+5cZqJmAhnuQQKBmvDousYTDzpAeM9KdPQTyVoJL4byEe  10     
 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB  9      
 AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn  1000000
 C9r7VaDTBrgm8vPFB7BCjEVhXD3kW5vRT2PEgezdyjNQ  220300 
 CNwdEBCLHJN5sUDwydDMjJdKmNA88KSi16N4pFuxbsNL  0      
+DEpBz1FB1Jg4JiWU331vpu7kDuTnPiypvhGFWhz19yXB  1      
+FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e  1      
+g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns   1      
 ```
 
-#### 8.8 Open the account on the Solana explorer to check your balance
+#### 8.11 Open one of the tokens on the Solana explorer
 
-- [mainet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd)
-- [devnet](https://explorer.solana.com/address/y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd?cluster=devnet)
+- [mainet](https://explorer.solana.com/address/FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e)
+- [devnet](https://explorer.solana.com/address/FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e?cluster=devnet)
 
-![account2.png](./account2.png)
+![candy2.png](./candy2.png)
 
 #### 9 Listing the Token
 
@@ -832,10 +891,10 @@ Created binary (application) `contract` package
 cargo build --release
 ```
 ```bash
-TODO
+Finished release [optimized] target(s) in 2m 40s
 ```
 
-#### 12.4 Compile the program and run the executable file
+#### 12.5 After building the release, compile for Solana
 ```bash
 rustc ./src/main.rs 
 ./main
