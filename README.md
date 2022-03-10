@@ -492,10 +492,41 @@ g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns   1
 - [devnet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri?cluster=devnet)
 
 ![candy1.png](./candy1.png)
-
 ![candy2.png](./candy2.png)
 
-#### 8.12 Trying to create an account for the token fails because it is handled by Candy Machine
+#### 8.12 Check the NFT metadata
+![Token8.png](./token8.png)
+![Token metadata.png](./token_metadata.png)
+```bash
+{
+  "key": 4,
+  "updateAuthority": "GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3",
+  "mint": "g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns",
+  "data": {
+    "name": "Number #0008",
+    "symbol": "NISMAN",
+    "uri": "https://bafkreiamuicmrmmb5cti4sv5aftzo26qcrltezkbhaxrbytlww3tkr66t4.ipfs.dweb.link",
+    "sellerFeeBasisPoints": 0,
+    "creators": [
+      {
+        "address": "DyiNkgy7xRPsg5iM8zrZziCX2wmq3E4mhMfdAHJfNzSU",
+        "verified": 1,
+        "share": 0
+      },
+      {
+        "address": "GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3",
+        "verified": 0,
+        "share": 100
+      }
+    ]
+  },
+  "primarySaleHappened": 1,
+  "isMutable": 0,
+  "editionNonce": 253
+}
+```
+
+#### 8.13 Trying to create an account for the token fails because it is handled by Candy Machine
 ```bash
 spl-token create-account g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner key.json
 ```
