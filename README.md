@@ -19,6 +19,7 @@
 
 ## 2 References
 
+- [Solana CLI Usage](https://docs.solana.com/cli/usage)
 - [Getting Started with MetaPlex](https://docs.metaplex.com/token-metadata/getting-started)
 - [File System Wallet](https://docs.solana.com/wallet-guide/file-system-wallet)
 - [Install the Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
@@ -264,6 +265,14 @@ solana airdrop 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
 ```bash
 Signature: 2RkG5e9TZozHQFVqGBaB5pwpSwo1CEiZYud4C5BwFSybN3S8gjQp41hUBqQ533fa7WcLukP5uHE9SnB9e86Ni8Nu
 ```
+More about [Signatures](https://coinyuppie.com/is-it-an-authorized-transfer-or-a-direct-steal-solana-authorized-phishing-event-analysis/):
+```
+Signature Diffusion Mechanism in Solana
+
+In Solana, there is a signature diffusion mechanism. The user calls contract A, and the user in contract A has signed and approved it. When contract A calls contract B internally, the user’s signature will spread to contract B along with the cross-contract call. Therefore, in contract B, the user is also signed to approve. So there is a security risk here. When signing a malicious contract, the malicious contract obtains our signature, but it can do anything with our signature! ! ! ! ! ! !
+
+In the above-mentioned theft incident, the user made a transaction with the malicious contract 3VtjHnDuDD1QreJiYNziDsdkeALMT6b2F9j3AXdL4q8v, which directly called the system contract to transfer the user’s SOL, because the signature spread to the system contract along with the call, so the system contract considered the transaction It is also approved and normal, so the user’s assets are transferred.
+```
 
 ## 7 Creating a Token
 
@@ -450,9 +459,6 @@ npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts mint_one_toke
 mint_one_token finished 2oy2UeJ7ajuSTdDRCGGfewo2LfYtdNfm1Pyhm4WrTWyGY2TK8hrCYkTJ9eL3sbMd3FhQrvmVjXrRgunhCpYwiv6C
 ```
 
-#### 8.8 Check your 
-
-
 #### 8.9 Mint multiple tokens
 ```bash
 npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts mint_one_token \
@@ -462,14 +468,10 @@ npx ts-node ./metaplex/js/packages/cli/src/candy-machine-v2-cli.ts mint_one_toke
 mint_one_token finished 2oy2UeJ7ajuSTdDRCGGfewo2LfYtdNfm1Pyhm4WrTWyGY2TK8hrCYkTJ9eL3sbMd3FhQrvmVjXrRgunhCpYwiv6C
 ```
 
-#### 8.10 Open the Candy Machine output on the Solana explorer
-
-- [mainet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri)
-- [devnet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri?cluster=devnet)
-
-![candy1.png](./candy1.png)
-
-#### 8.11 Checking your balance 
+#### 8.10 Checking your balance 
+```bash
+spl-token accounts --owner ./key.json
+```
 ```bash
 Token                                         Balance
 ---------------------------------------------------------------
@@ -484,12 +486,23 @@ FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e  1
 g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns   1      
 ```
 
-#### 8.11 Open one of the tokens on the Solana explorer
+#### 8.11 Open the Candy Machine output on the Solana explorer
 
-- [mainet](https://explorer.solana.com/address/FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e)
-- [devnet](https://explorer.solana.com/address/FoxTkih1Tb3emCVV65V7G3avbCk7UrKgpJzrGfgLTw8e?cluster=devnet)
+- [mainet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri)
+- [devnet](https://explorer.solana.com/address/8vjuNEaUwjJJTRcGg66yywYbBJUu3ipNRYvPRULwkxri?cluster=devnet)
+
+![candy1.png](./candy1.png)
 
 ![candy2.png](./candy2.png)
+
+#### 8.12 Trying to create an account for the token fails because it is handled by Candy Machine
+```bash
+spl-token create-account g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner key.json
+```
+```bash
+Creating account DYc1kfPiCp6qsVk7jbTrEuKcBmDYPFtYjsWaZqPbPxoz
+Error: Account already exists: DYc1kfPiCp6qsVk7jbTrEuKcBmDYPFtYjsWaZqPbPxoz
+```
 
 #### 9 Listing the Token
 
@@ -586,103 +599,103 @@ Rent Epoch: 270
 
 #### 10.5 Create an account for the other account
 ```bash
-spl-token create-account 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner other.json
+spl-token create-account g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner other.json
 ```
 ```bash
-Creating account Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
-Signature: UhR64tVJzEWPvAsVJJCnAKV7nSgc7ZMrPGyt28sYEKv26hGhjp8j7jK4wDAcif5BEKx5HvApSA6HdE4sqTGyfD3
+Creating account H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR
+Signature: 61tgcMu6pJHDubGUQ2NsVQVrf1AhnrLVCxiJ9DijjLiMHBdJoUi7jpyLZXDM1Rkmkv7cQpQJRXr3g4DsE4Ps6DLW
 ```
 
 #### 10.6 Transfer a release into the new account
 ```bash
-spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ --owner ./key.json
+spl-token transfer g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns 1 H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR --owner ./key.json
 ```
 ```bash
 Transfer 1 tokens
-  Sender: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
-  Recipient: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
+  Sender: DYc1kfPiCp6qsVk7jbTrEuKcBmDYPFtYjsWaZqPbPxoz
+  Recipient: H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR
+Signature: 2BU6SgoxEdBKagiTtKRNDrQZ18Nf1UfJaJWVkCJFC8UzLmqzzXEgDCZuZgDfphZgrW7m3D4o2iz21cN3T2vGCrmd
 ```
 
 #### 10.7 Check the new balance
 ```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
+spl-token balance g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
 ```
 ```bash
-9
+0
 ```
 ```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+spl-token balance g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
 ```
 ```bash
 1
 ```
 
-#### 10.8 Check the latest transactions associated with the token
+#### 10.8 Allow another account to transfer the NFT on your behalf
 ```bash
-solana transaction-history y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
+spl-token approve H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 --owner other.json
 ```
 ```bash
-4GNB2eCzsXh2ooPNN7iNzArpNXeAMNcBnBrhHG7aw4VxsnFFWFGHnRaNAn2gM8S8nVKRzHDNL2tttV9AVcNAf9oW
-2Jwve2yM79EguUzoEg8TptomsgGaWLEJTy5uEbyB3q3cuADJZ2gYAFYSntZ8CE9TCDBGy9Ga151nKcRKFddFsmow
-5LqDVwxHDK3U2KfzuykqYaQ8UKGhkfFggQfiqfGHAka3wEREjZHhP9492DwqhLSLLVPZgDKH9byMhi7YoUV8G9py
-2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2
-6mZPD17kUyk1W5ZssNZ8bezPedznGKE5dfCPyeRgWbYm4ejQoNsjA1XUGotPFTaPNfnyNSCim3FsioMwYXLVCsY
-5xjn4CAKryxJnA1dMZwonpQzvwsCegGj7hCt8iXbWB4ifuZ3hFKPd2j2GvcE1fVHPHbmJCaNhr3GJHxscYBYCTvq
-4CbHsyA5SqrxAJgVBVynuJBovGSoZYAfZ2qwD8bWLvYRN73L2abZNMDRSQgBwhVX27qxyRhESXxGgrjh9hmmxHbx
-3vLhCaDVeJziw9tcNRSrS2CHz5G5FJWyUsX1RZXZEyd3UPBvTD9pQJiobXwtP5ibCx79TzDRkWGULRE28F1c3Lyk
-4LgztnskmdowCN7tnKsXkfP3r39dyqfnS7RmByXFbFHNwyFrPHx6kKKefR5YHcRFrWb7H6GpiBZFFwqJioZqXWrh
-9 transactions found
+Approve 1 tokens
+  Account: H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR
+  Delegate: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+Signature: JF7N61Gu6DqAcan6vYhZN1ezCQRHkPRkyTjc2JutS72pSxM3ymuh4PNbf8P5q662hc7QPHrBvT8ZF6ksVsAvSG9
 ```
 
-#### 10.9 Check the latest transactions associated with the receiver
+#### 10.9 Use your approval to transfer the NFT on behalf of the other account
+```bash
+spl-token transfer g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns 1 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 --owner key.json --from H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR
+```
+```bash
+Transfer 1 tokens
+  Sender: H16QimPvJ5GBc7eXzp4S2RxvsWqEypfZRDodwDY1vmRR
+  Recipient: GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+  Recipient associated token account: DYc1kfPiCp6qsVk7jbTrEuKcBmDYPFtYjsWaZqPbPxoz
+Signature: 4AHAyKDfqWp4gk9jJTKx8ctqJWxLjL87Z5bG1eNHzAbQVAWqbYNN3Cqytj6rJmPma4aJd7aR7EcmgdhaiKUA6g2M
+```
+
+#### 10.10 Check the balance of the sender
+```bash
+spl-token balance g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3
+```
+```bash
+0
+```
+```bash
+spl-token balance g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns --owner AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
+```
+```bash
+1
+```
+
+#### 10.11 Check the latest transactions associated with the token
+```bash
+solana transaction-history g291tKH38BBYXQWeKMrkPCXu1LshymdETbN4u6BeSns
+```
+```bash
+2BU6SgoxEdBKagiTtKRNDrQZ18Nf1UfJaJWVkCJFC8UzLmqzzXEgDCZuZgDfphZgrW7m3D4o2iz21cN3T2vGCrmd
+61tgcMu6pJHDubGUQ2NsVQVrf1AhnrLVCxiJ9DijjLiMHBdJoUi7jpyLZXDM1Rkmkv7cQpQJRXr3g4DsE4Ps6DLW
+4qui7MS7TH4fqnEXn8DnhWohvnpoohoogyrMmWC8a5GtrdvSAN22Y3uGQtLEGVutPEUHLtH4oyzzbrAV8rr14Bfd
+3 transactions found
+```
+
+#### 10.12 Check the latest transactions associated with the receiver
 ```bash
 solana transaction-history AxHmduv298YFHUi6eTRhoXAWVdmEsRD4i44Ce9kD8ipv
 ```
 ```bash
+61tgcMu6pJHDubGUQ2NsVQVrf1AhnrLVCxiJ9DijjLiMHBdJoUi7jpyLZXDM1Rkmkv7cQpQJRXr3g4DsE4Ps6DLW
+gA14iUUjZvxMmnZEpab61Zixb1XUqghzFx2FAjn3BHkbbP4U8Y99oZsgp443cJAxn73PLwbR7xE1kNEuvmGGYRt
+5eGabQattEckgeZsMdTJMyAJ51iZc853wu3x2VWyeH8j7Tycf51M1R6JH36qvWWPEjXJXuZqQ2YG842zVNjzrrVM
+U2yxzLAx57NYA4fYNq7QY5GG2aV15qCWjNHUAh2cbM2DozjbHJzpFoxA6KBYr6XX3hRMpjj9L6n6pubi7hGEPgd
+4HkrBdeYcQTA6ZEC14rkKyQYMUoF2UgBc5Foa3xP7Q8PZCWg7eVhUVZaA4cz8M1Y5ZGQX1VJSm2J5KTb522hR5sA
+2Q2mKdjvMFfXuDuvwbwY4X7mZEJaUTKcwjXzAnarX2Q5PxbTYKmi2DsEdrFtYJZ2ARDvSrXLnWAC4hPg7o4Gcjnb
 2Jwve2yM79EguUzoEg8TptomsgGaWLEJTy5uEbyB3q3cuADJZ2gYAFYSntZ8CE9TCDBGy9Ga151nKcRKFddFsmow
 2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2
 6mZPD17kUyk1W5ZssNZ8bezPedznGKE5dfCPyeRgWbYm4ejQoNsjA1XUGotPFTaPNfnyNSCim3FsioMwYXLVCsY
 5xjn4CAKryxJnA1dMZwonpQzvwsCegGj7hCt8iXbWB4ifuZ3hFKPd2j2GvcE1fVHPHbmJCaNhr3GJHxscYBYCTvq
 UhR64tVJzEWPvAsVJJCnAKV7nSgc7ZMrPGyt28sYEKv26hGhjp8j7jK4wDAcif5BEKx5HvApSA6HdE4sqTGyfD3
-5 transactions found
-```
-
-#### 10.10 Visit [Solscan](https://solscan.io/token/8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB?cluster=devnet#txs) to look at your NFT
-
-![solscan1.png](./solscan1.png)
-
-#### 10.11 Open the [Transaction](https://solscan.io/tx/2csLCiSNxJEizfxsFEDVYwaHRB69jkxEk2ZjWHfnvDu8DppR3DJ3YZ1F6zNjbAGWWc7ER8oau4pxjzJUZxCqH4a2?cluster=devnet) to look at the Token Balance Change 
-
-![solscan2.png](./solscan2.png)
-
-
-#### 10.12 Allow another account to transfer the NFT on your behalf
-```bash
-spl-token approve Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json
-```
-```bash
-Approve 1 tokens
-  Account: Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
-  Delegate: y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd
-Signature: U2yxzLAx57NYA4fYNq7QY5GG2aV15qCWjNHUAh2cbM2DozjbHJzpFoxA6KBYr6XX3hRMpjj9L6n6pubi7hGEPgd
-```
-
-#### 10.13 Use your approval to transfer the NFT on behalf of the other account
-```bash
-spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json --from Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
-spl-token transfer 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB 1 y1tHVi5L4yxBXYts3pDXr66biCcbaTeqtTuiKdEfLUd --owner other.json --from Cfm1v2s18DR9hKFD8diGNnT51tvGgvtgiN31RByML2qQ
-```
-```bash
-TODO
-```
-
-#### 10.14 Check the balance of the sender
-```bash
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./key.json
-spl-token balance 8kjeYR9e5R8D1DjZjsRtVktCK7xkbGytqxgwXn842dyB --owner ./other.json
-```
-```bash
-TODO
+11 transactions found
 ```
 
 ## 11 Rust Development

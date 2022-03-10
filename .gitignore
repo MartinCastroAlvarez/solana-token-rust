@@ -2,3 +2,4 @@
 */target/CACHEDIR.TAG
 */target/debug
 */target/.rustc_info.json
+.cache/
