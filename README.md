@@ -16,6 +16,7 @@
 - [10 Transferring Tokens](#10-transferring-tokens)
 - [11 Rust Development](#11-rust-development)
 - [12 Deploying a Program](#12-deploying-a-program)
+- [13 Approvals](#13-approvals)
 
 ## 2 References
 
@@ -945,4 +946,46 @@ rustc ./src/main.rs
 ```
 ```bash
 TODO
+```
+
+## 13 Approvals
+
+#### 13.1 Creating a token account
+```
+spl-token create-account AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn --owner ./other.json
+```
+```
+Account: 9SiGoPXKt5K7gjFCMQa9w3YdbLDbPSme7XFAVywwHmeD
+```
+
+#### 13.2 Trasnferring some tokens
+```
+spl-token transfer AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 100 9SiGoPXKt5K7gjFCMQa9w3YdbLDbPSme7XFAVywwHmeD --owner ./key.json
+```
+```
+Signature: 59GeZ6yvnGJakjPeoJ3LeGQJKvZ3FsoD5QgSXAMdzvTEu8f21SbD9NKZ8vm6LPQn1Bzd7HqAcrNxnUArN8kyFR4q
+```
+
+#### 13.3 Approving 10 tokens
+```
+spl-token approve 9SiGoPXKt5K7gjFCMQa9w3YdbLDbPSme7XFAVywwHmeD 10 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 --owner other.json
+```
+```
+Signature: 59GeZ6yvnGJakjPeoJ3LeGQJKvZ3FsoD5QgSXAMdzvTEu8f21SbD9NKZ8vm6LPQn1Bzd7HqAcrNxnUArN8kyFR4q
+```
+
+#### 13.4 Transferring those tokens
+```
+spl-token transfer AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 9 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 --owner key.json --from 9SiGoPXKt5K7gjFCMQa9w3YdbLDbPSme7XFAVywwHmeD
+```
+```
+Signature: 59GeZ6yvnGJakjPeoJ3LeGQJKvZ3FsoD5QgSXAMdzvTEu8f21SbD9NKZ8vm6LPQn1Bzd7HqAcrNxnUArN8kyFR4q
+```
+
+#### 13.5 Transferring more tokens than approved causes an error
+```
+spl-token transfer AqoJM91CTkXXhyx8qi5HJZGPaozRHc33zSyXz1EnTnWn 2 GRbqKQ332wWMsFU43N3VSY9EhhPsNKZh3sszhXdsQSR3 --owner key.json --from 9SiGoPXKt5K7gjFCMQa9w3YdbLDbPSme7XFAVywwHmeD
+```
+```
+Signature: 59GeZ6yvnGJakjPeoJ3LeGQJKvZ3FsoD5QgSXAMdzvTEu8f21SbD9NKZ8vm6LPQn1Bzd7HqAcrNxnUArN8kyFR4q
 ```
